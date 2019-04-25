@@ -32,7 +32,6 @@ tar xvzf openshift-origin-client-tool*
 cd openshift-origin-client-tools*
 cp oc  /usr/local/sbin
 
-# test
 
 SCRIPT
 
