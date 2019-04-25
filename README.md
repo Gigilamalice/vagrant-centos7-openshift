@@ -19,7 +19,7 @@ oc login xxxx
 Git project Clone, you can choose target folde
 
 ``` shell
-git clone https://github.com/Gigilamalice/vagrant-centos7-omdbtool.git vagrant-centos7-omdbtool
+git clone https://github.com/Gigilamalice/vagrant-centos7-oc.git vagrant-centos7-oc
 cd vagrant-centos7-omdbtool
 ```
 
