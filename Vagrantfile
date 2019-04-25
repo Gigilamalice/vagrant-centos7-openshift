@@ -4,7 +4,7 @@ VAGRANTFILE_API_VERSION = "2"
 # define hostname
 NAME = "octool"
 
-OC-BIN="https://github.com/openshift/origin/releases/download/v3.7.2/openshift-origin-client-tools-v3.7.2-282e43f-linux-64bit.tar.gz"
+OCBIN="https://github.com/openshift/origin/releases/download/v3.7.2/openshift-origin-client-tools-v3.7.2-282e43f-linux-64bit.tar.gz"
 
 
 $deployuserrootscript = <<-SCRIPT
@@ -15,7 +15,7 @@ echo as user: $(whoami), at current path: $(pwd), on hostname: $(hostname)
 echo with args passed: $1
 echo
 echo ================================================================================
-
+sleep 10
 # yum update -y
 # yum -y install python-pip -y
 yum install -y wget
@@ -25,8 +25,10 @@ yum install -y git
 echo LANG=en_US.utf-8 >> /etc/environment
 echo LC_ALL=en_US.utf-8 >> /etc/environment
 
+# Download OC client
+cd /tmp
 wget $1
-xvzf openshift-origin-client-tool*
+tar xvzf openshift-origin-client-tool*
 cd openshift-origin-client-tools*
 cp oc  /usr/local/sbin
 
@@ -61,8 +63,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.cpus = "2"
   end
 
-  config.vm.provision "shell", privileged: true,  keep_color: true, inline: $deployuserrootscript, args:[OC-BIN]
-  config.vm.provision "shell", privileged: false, keep_color: true, inline: $deployuservagrantscript, args:[OC-BIN]
+  config.vm.provision "shell", privileged: true,  keep_color: true, inline: $deployuserrootscript, args:[OCBIN]
+  config.vm.provision "shell", privileged: false, keep_color: true, inline: $deployuservagrantscript, args:[OCBIN]
   config.vm.provision "shell", inline: "echo 'INSTALLER: Installation complete, CentOS 7 ready to use!'"
   
   #config.vm.provision "shell", path: "scripts/install.sh"
