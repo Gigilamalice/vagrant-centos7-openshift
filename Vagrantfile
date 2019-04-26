@@ -77,7 +77,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/vagrant"
   
   # Port forwarding
-  #config.vm.network "forwarded_port", guest: 22, host: 2220
+  config.vm.network "forwarded_port", guest: 22, host: 2220
+  # Port for Local Docker Repository 
+  config.vm.network "forwarded_port", guest: 5000, host: 5000
+  # Port for Webgui Portainer
+  config.vm.network "forwarded_port", guest: 9000, host: 9000
   #config.vm.network "forwarded_port", guest: 5000, host: 5000
 
 
