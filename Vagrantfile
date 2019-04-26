@@ -27,23 +27,36 @@ echo LC_ALL=en_US.utf-8 >> /etc/environment
 
 # Download OC client
 cd /tmp
-wget $1
+wget $1 -o wget.log
 tar xvzf openshift-origin-client-tool*
 cd openshift-origin-client-tools*
 cp oc  /usr/local/sbin
 
 
+# 
+yum install docker device-mapper-libs device-mapper-event-libs -y
+systemctl start docker.service
+systemctl status docker
+systemctl enable docker.service
+
+groupadd docker
+usermod -aG docker vagrant
+
 SCRIPT
 
 $deployuservagrantscript = <<-SCRIPT
 echo ================================================================================
-echo I am provisioning co  ...
+echo I am testin oc and docker ...
 echo
 echo as user: $(whoami), at current path: $(pwd), on hostname: $(hostname)
 echo with args passed: $1
 echo  
 echo ================================================================================
-oc
+echo .
+echo .
+oc version | grep "oc"
+echo
+docker version | grep "version"
 
 SCRIPT
 
