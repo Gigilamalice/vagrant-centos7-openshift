@@ -16,10 +16,11 @@ echo with args passed: $1
 echo
 echo ================================================================================
 sleep 10
-# yum update -y
-# yum -y install python-pip -y
+# yum -y update
+# yum -y install python-pip
 yum install -y wget
 yum install -y git
+yum install -y nano tree
 
 # fix locale warning
 echo LANG=en_US.utf-8 >> /etc/environment
@@ -33,14 +34,20 @@ cd openshift-origin-client-tools*
 cp oc  /usr/local/sbin
 
 
-# 
-yum install docker device-mapper-libs device-mapper-event-libs -y
+# Install Docker 
+yum install -y docker device-mapper-libs device-mapper-event-libs
 systemctl start docker.service
-systemctl status docker
+# systemctl status docker
 systemctl enable docker.service
+sudo chcon -t docker_exec_t /usr/bin/docker*
+sudo systemctl restart docker
 
 groupadd docker
 usermod -aG docker vagrant
+
+# Create local Repository
+# yum -y install yum-utils
+
 
 SCRIPT
 
@@ -71,6 +78,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   # Port forwarding
   #config.vm.network "forwarded_port", guest: 22, host: 2220
+  #config.vm.network "forwarded_port", guest: 5000, host: 5000
+
 
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "1024"
