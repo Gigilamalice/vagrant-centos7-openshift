@@ -15,18 +15,19 @@ echo as user: $(whoami), at current path: $(pwd), on hostname: $(hostname)
 echo with args passed: $1
 echo
 echo ================================================================================
-sleep 10
-# yum -y update
-# yum -y install python-pip
-yum install -y wget
-yum install -y git
-yum install -y nano tree
 
 # fix locale warning
 echo LANG=en_US.utf-8 >> /etc/environment
 echo LC_ALL=en_US.utf-8 >> /etc/environment
 
-# Download OC client
+# yum -y update
+yum install -y wget
+yum install -y git
+# yum install -y nano tree zsh
+# yum -y install python-pip
+
+
+# Download openshift client oc
 cd /tmp
 wget $1 -o wget.log
 tar xvzf openshift-origin-client-tool*
