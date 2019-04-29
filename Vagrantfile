@@ -83,7 +83,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "forwarded_port", guest: 5000, host: 5000
   # Port for Webgui Portainer
   config.vm.network "forwarded_port", guest: 9000, host: 9000
-  #config.vm.network "forwarded_port", guest: 5000, host: 5000
+  # Port for Webgui Registry
+  config.vm.network "forwarded_port", guest: 80, host: 8080
 
 
   config.vm.provider "virtualbox" do |vb|
