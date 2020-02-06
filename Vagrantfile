@@ -13,7 +13,7 @@ echo I am provisioning linux package and configuration ...
 echo
 echo as user: $(whoami), at current path: $(pwd), on hostname: $(hostname)
 echo with args passed: $1
-echo
+echo hello
 echo ================================================================================
 
 # fix locale warning
