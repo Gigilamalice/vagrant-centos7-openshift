@@ -26,14 +26,12 @@ yum install -y git
 # yum install -y nano tree zsh
 # yum -y install python-pip
 
-
 # Download openshift client oc
 cd /tmp
 wget $1 -o wget.log
 tar xvzf openshift-origin-client-tool*
 cd openshift-origin-client-tools*
 cp oc  /usr/local/sbin
-
 
 # Install Docker 
 yum install -y docker device-mapper-libs device-mapper-event-libs
@@ -54,7 +52,7 @@ SCRIPT
 
 $deployuservagrantscript = <<-SCRIPT
 echo ================================================================================
-echo I am testin oc and docker ...
+echo I am testing oc and docker ...
 echo
 echo as user: $(whoami), at current path: $(pwd), on hostname: $(hostname)
 echo with args passed: $1
@@ -65,6 +63,8 @@ echo .
 oc version | grep "oc"
 echo
 docker version | grep "version"
+
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 SCRIPT
 
